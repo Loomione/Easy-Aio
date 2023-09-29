@@ -25,13 +25,13 @@ To build the library and example program, follow these steps:
 1. Clone the repository to your local machine:
 
     ```bash
-    git clone https://github.com/loominoe/EasyAio.git
+    git clone https://github.com/loominoe/Easy-Aio.git
     ```
 
 2. Navigate to the project directory:
 
     ```bash
-    cd EasyAio
+    cd Easy-Aio
     ```
 
 3. Build the library:
