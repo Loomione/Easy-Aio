@@ -12,7 +12,7 @@ LinuxAio::LinuxAio(int max_events, int fd) : max_events_(max_events), fd_(fd) {
 
 LinuxAio ::~LinuxAio() {
   for (size_t i = 0; i < iocbs_.size(); ++i) {
-    delete iocbs_[i];
+    free(iocbs_[i]);
   }
   // clear iocbs_
   iocbs_.clear();
@@ -28,8 +28,8 @@ void LinuxAio::CreateWriteEvent(std::string &buf, int offset) {
 }
 
 void LinuxAio::CreateReadEvent(std::string &buf, int offset, int size) {
-  iocbs_.push_back(new IOCB());  // add a new iocb
-  events_.push_back(io_event()); // add a new io_event
+  iocbs_.push_back((IOCB *)(malloc(sizeof(IOCB)))); // add a new iocb
+  events_.push_back(io_event());                    // add a new io_event
   io_prep_pread(iocbs_.back(), fd_, const_cast<char *>(buf.c_str()), size,
                 offset);
 }
